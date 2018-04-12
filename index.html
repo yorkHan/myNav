@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>我的导航</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <header></header>
+    <main>
+        <div class="box" id="cover"></div>
+    </main>
+    <footer></footer>
+</body>
+<script>
+var keys={
+                0:['q','w','e','r','t','y','u','i','o','p'],
+                1:['a','s','d','f','g','h','j','k','l'],
+                2:['z','x','c','v','b','n','m'],
+                length:3
+            }
+            var hash={
+                'q':'qq.com',
+                'w':'weibo',
+                'e':'ele.me',
+                'r':'renren.com',
+                't':'taobao.com',
+                'y':'youku.com',
+                'u':'uc.cn',
+                'i':'iqiyi.com',
+                'o':'opera.com',
+                'p':undefined,
+                'a':'alibaba.com',
+                's':'sougou.com',
+                'm':'mcdonalds.com.cn'
+            }
+            var hashLocalStorage=JSON.parse(localStorage.getItem('save')) 
+            if(hashLocalStorage){
+                hash=hashLocalStorage
+            }
+            index=0
+            while(index<keys.length){
+            div1=document.createElement("div")
+            cover.appendChild(div1)
+            row=keys[index]
+            index2=0
+            while(index2<row.length){
+                    z=document.createElement("kbd")
+                    z.textContent=row[index2]
+                    btn=document.createElement('button')
+                    btn.textContent="E"
+                    btn.id=row[index2]
+                    btn.onclick=function(b){
+                        keyE=b.target['id']
+                        web=prompt('请给我个网址')
+                        hash[keyE]=web
+                        localStorage.setItem('save',JSON.stringify(hash))
+                        console.log(hash)
+                    }
+                    z.appendChild(btn)
+                    cover.appendChild(z)
+                    index2=index2+1
+            }
+            index=index+1
+            }
+
+            document.onkeypress=function(a){
+               key= a['key']
+               website=hash[key]
+            //    location.href="http://"+website
+            window.open("http://"+website,"_blank")
+            }
+        </script>
+</html>
